@@ -191,9 +191,10 @@ void COpenCvDemoDlg::OnBnClickedWndMatch() {
             }
         }
         else {
-            m_pWndRecognizer->Stop();
-            m_pWndRecognizer.reset();
-            m_btMatch.EnableWindow(FALSE);
+            if (m_pWndRecognizer) {
+                m_pWndRecognizer->Stop();
+                m_pWndRecognizer.reset();
+            }
         }
     }
     catch (const std::exception&e) {
@@ -224,8 +225,11 @@ void COpenCvDemoDlg::OnBnClickedSelectWnd() {
     else if (buttonText == L"È·¶¨") {
         m_btSelect.SetWindowText(L"ÉèÖÃ");
         m_btSelect.EnableWindow(FALSE);
-        m_pFetchFocusWnd->Stop();
-        m_pFetchFocusWnd.reset();
+        if (m_pFetchFocusWnd) {
+            m_pFetchFocusWnd->Stop();
+            m_pFetchFocusWnd.reset();
+        }
+
     }
 }
 
@@ -372,9 +376,10 @@ void COpenCvDemoDlg::OnBnClickedCheckVedio() {
         }
     }
     else {
-        m_btCheckVideo.EnableWindow(FALSE);
-        m_pVideoRecognizer->Stop();
-        m_pVideoRecognizer.reset();
+        if (m_pVideoRecognizer) {
+            m_pVideoRecognizer->Stop();
+            m_pVideoRecognizer.reset();
+        }
     }
 }
 
